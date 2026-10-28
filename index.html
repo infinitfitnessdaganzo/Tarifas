@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta charset="UTF-8"><title>Tarifas</title>
+<style>
+body{font-family:Arial;background:#f4f4f4;margin:30px;padding-bottom:90px}
+h2{margin-top:30px;color:#0b5ed7;border-bottom:2px solid #0b5ed7;padding-bottom:4px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:15px;margin-top:15px}
+.boton{background:#fff;border:1px solid #ccc;border-radius:8px;padding:18px;cursor:pointer;transition:.2s;box-shadow:0 2px 5px rgba(0,0,0,.08);text-align:center}
+.boton:hover{background:#dff1ff;transform:translateY(-2px)}
+.boton.copiado{background:#28a745!important;color:#fff;border-color:#28a745}
+.titulo{font-weight:bold;font-size:18px;margin-bottom:10px}
+.descripcion{font-size:24px;color:#666}
+
+.top-bar{display:flex;justify-content:space-between;align-items:center}
+.btn-chuleta{background:#0b5ed7;color:#fff;border:none;border-radius:8px;padding:10px 18px;font-size:15px;font-weight:bold;cursor:pointer;box-shadow:0 2px 5px rgba(0,0,0,.15);transition:.2s}
+.btn-chuleta:hover{background:#0948ad}
+
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.45);z-index:100;align-items:center;justify-content:center}
+.overlay.abierto{display:flex}
+.panel{background:#fff;border-radius:12px;max-width:480px;width:92%;max-height:85vh;overflow-y:auto;padding:25px 28px;box-shadow:0 10px 30px rgba(0,0,0,.3);position:relative}
+.panel h3{color:#0b5ed7;border-bottom:2px solid #0b5ed7;padding-bottom:4px;margin:20px 0 10px}
+.panel h3:first-of-type{margin-top:0}
+.cerrar{position:absolute;top:14px;right:16px;background:none;border:none;font-size:20px;cursor:pointer;color:#888}
+.cerrar:hover{color:#000}
+.linea{display:flex;justify-content:space-between;font-size:15.5px;padding:4px 0;border-bottom:1px dotted #ddd}
+.linea span:last-child{font-weight:bold;color:#0b5ed7;white-space:nowrap;margin-left:10px}
+table.descuentos{width:100%;border-collapse:collapse;margin-top:8px;font-size:14.5px}
+table.descuentos th,table.descuentos td{border:1px solid #ddd;padding:7px 10px;text-align:left}
+table.descuentos th{background:#0b5ed7;color:#fff}
+table.descuentos tr:nth-child(even){background:#f6f9ff}
+
+.caja-copiado{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:3px solid #0b5ed7;padding:14px 30px;box-shadow:0 -3px 10px rgba(0,0,0,.12);z-index:200;font-size:15px}
+.caja-copiado strong{color:#0b5ed7;margin-right:8px}
+#textoCopiado{margin-top:4px;color:#333;font-size:15.5px;word-break:break-word}
+</style></head><body>
+<div class="top-bar">
+<h1>📋 Tarifas</h1>
+<button class="btn-chuleta" onclick="document.getElementById('overlayChuleta').classList.add('abierto')">📋 Chuleta Tarifas</button>
+</div>
+
+<div class="overlay" id="overlayChuleta">
+<div class="panel">
+<button class="cerrar" onclick="document.getElementById('overlayChuleta').classList.remove('abierto')">✖</button>
+
+<h3>MENSUAL</h3>
+<div class="linea"><span>👤 Individual</span><span>54,90 €</span></div>
+<div class="linea"><span>👥 Pareja</span><span>49,90 €</span></div>
+
+<h3>ANUAL</h3>
+<div class="linea"><span>🗓️👤 Individual</span><span>44,90 €</span></div>
+<div class="linea"><span>🗓️👥 Pareja</span><span>39,90 €</span></div>
+
+<h3>PREPAGO</h3>
+<div class="linea"><span>💶 Individual</span><span>420 €</span></div>
+
+<h3>GPS</h3>
+<div class="linea"><span>🧭 Alta</span><span>30 €</span></div>
+<div class="linea"><span>🧭🎉 Promoción</span><span>0 €</span></div>
+
+<h3>ENTRENAMIENTOS PERSONALES</h3>
+<div class="linea"><span>🏋️👥 Duo 1H</span><span>100 €</span></div>
+<div class="linea"><span>🏋️👥 Duo 2H</span><span>180 €</span></div>
+<div class="linea"><span>🔓 Acceso 24h</span><span>+30 €</span></div>
+<div class="linea" style="margin-top:14px"><span>🏋️👤 One 1H</span><span>180 €</span></div>
+<div class="linea"><span>🏋️👤 One 2H</span><span>320 €</span></div>
+<div class="linea"><span>🔓 Acceso 24h</span><span>Incluido</span></div>
+
+<h3>DESCUENTO SEGÚN DÍA DE ALTA</h3>
+<table class="descuentos">
+<tr><th>Día del mes</th><th>Descuento</th></tr>
+<tr><td>Del 1 al 5</td><td>0 %</td></tr>
+<tr><td>Del 6 al 11</td><td>25 %</td></tr>
+<tr><td>Del 12 al 18</td><td>50 %</td></tr>
+<tr><td>Del 19 al 24</td><td>75 %</td></tr>
+<tr><td>A partir del 25</td><td>Alta gratuita (se cobra el mes siguiente)</td></tr>
+</table>
+
+</div>
+</div>
+
+<h2>🔵 Sin G.P.S.</h2><div class="grid">
+<script>
+const sg=[
+["Mensual - Individual","👤","PLAN INDIVIDUAL MENSUAL: 54.90 euros."],
+["Mensual - Pareja","👥","PLAN PAREJA MENSUAL: 49,90 euros."],
+["Anual - Individual","🗓️👤","PLAN INDIVIDUAL ANUAL PAGO MENSUAL: 44,90 euros."],
+["Anual - Pareja","🗓️👥","PLAN PAREJA ANUAL PAGO MENSUAL: 39,90 euros."],
+["Prepago","💶","PLAN INDIVIDUAL PREPAGO ANUAL: 420 euros."]
+];
+document.write(sg.map(b=>`<div class="boton" onclick="copiar('${b[2]}',this)"><div class=titulo>${b[0]}</div><div class=descripcion>${b[1]}</div></div>`).join(""));
+</script></div>
+
+<h2>🟢 Con G.P.S.</h2><div class="grid">
+<script>
+const gps=[
+["Mensual - Individual (GPS)","👤🧭","PROMOCION INDIVIDUAL. G.P.S: 30 euros. PLAN INDIVIDUAL MENSUAL: 54.90 euros."],
+["Mensual - Pareja (GPS)","👥🧭","PROMOCION PAREJA. G.P.S: 30 euros. PLAN PAREJA MENSUAL: 49,90 euros."],
+["Anual - Individual (GPS)","🗓️👤🧭","PROMOCION INDIVIDUAL. G.P.S: 30 euros. PLAN INDIVIDUAL ANUAL PAGO MENSUAL: 44,90 euros."],
+["Anual - Pareja (GPS)","🗓️👥🧭","PROMOCION PAREJA. G.P.S: 30 euros. PLAN PAREJA ANUAL PAGO MENSUAL: 39,90 euros."],
+["Prepago (GPS)","💶🧭","PROMOCION INDIVIDUAL. G.P.S: 30 euros. PLAN INDIVIDUAL PREPAGO ANUAL: 420 euros."]
+];
+document.write(gps.map(b=>`<div class="boton" onclick="copiar('${b[2]}',this)"><div class=titulo>${b[0]}</div><div class=descripcion>${b[1]}</div></div>`).join(""));
+</script></div>
+
+<div class="grid">
+<script>
+const gpsPromo=[
+["Mensual - Individual (GPS Promo)","👤🧭🎉","PROMOCION INDIVIDUAL. G.P.S: 0 euros. PLAN INDIVIDUAL MENSUAL: 54.90 euros."],
+["Mensual - Pareja (GPS Promo)","👥🧭🎉","PROMOCION PAREJA. G.P.S: 0 euros. PLAN PAREJA MENSUAL: 49,90 euros."],
+["Anual - Individual (GPS Promo)","🗓️👤🧭🎉","PROMOCION INDIVIDUAL. G.P.S: 0 euros. PLAN INDIVIDUAL ANUAL PAGO MENSUAL: 44,90 euros."],
+["Anual - Pareja (GPS Promo)","🗓️👥🧭🎉","PROMOCION PAREJA. G.P.S: 0 euros. PLAN PAREJA ANUAL PAGO MENSUAL: 39,90 euros."],
+["Prepago (GPS Promo)","💶🧭🎉","PROMOCION INDIVIDUAL. G.P.S: 0 euros. PLAN INDIVIDUAL PREPAGO ANUAL: 420 euros."]
+];
+document.write(gpsPromo.map(b=>`<div class="boton" onclick="copiar('${b[2]}',this)"><div class=titulo>${b[0]}</div><div class=descripcion>${b[1]}</div></div>`).join(""));
+</script></div>
+
+<h2>🟠 Entrenamientos Personales</h2><div class="grid">
+<script>
+const ep=[
+["EP - Duo 1H (Sin acceso)","🏋️👥⭐🔒","CONTRATO DUO 1H a la semana: 100 euros."],
+["EP - Duo 1H (Con acceso)","🏋️👥⭐🔓","CONTRATO DUO 1H a la semana: 100 euros. ACCESO 24h: 30 euros."],
+["EP - Duo 2H (Sin acceso)","🏋️👥⭐⭐🔒","CONTRATO DUO 2H a la semana: 180 euros."],
+["EP - Duo 2H (Con acceso)","🏋️👥⭐⭐🔓","CONTRATO DUO 2H a la semana: 180 euros. ACCESO 24h: 30 euros."],
+["EP - One 1H (Acceso incluido)","🏋️👤⭐🔓","CONTRATO ONE 1H a la semana: 180 euros. ACCESO 24h: 0 euros."],
+["EP - One 2H (Acceso incluido)","🏋️👤⭐⭐🔓","CONTRATO ONE 2H a la semana: 320 euros. ACCESO 24h: 0 euros."]
+];
+document.write(ep.map(b=>`<div class="boton" onclick="copiar('${b[2]}',this)"><div class=titulo>${b[0]}</div><div class=descripcion>${b[1]}</div></div>`).join(""));
+</script></div>
+
+<div class="caja-copiado" id="cajaCopiado">
+<strong>📋 Último texto copiado:</strong>
+<div id="textoCopiado">Pulsa una tarifa para ver aquí el texto copiado…</div>
+</div>
+
+<script>
+function copiar(t,e){
+navigator.clipboard.writeText(t);
+e.classList.add('copiado');
+const d=e.querySelector('.descripcion');
+const o=d.innerHTML;
+d.innerHTML='✔ Copiado';
+setTimeout(()=>{e.classList.remove('copiado');d.innerHTML=o;},1000);
+document.getElementById('textoCopiado').textContent=t;
+}
+</script>
+</body></html>
